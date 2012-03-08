@@ -86,7 +86,11 @@ def set_attrs(obj, attrs):
     if hasattr(obj, '__setitem__'):
         o = type(obj).__setitem__
 
-    [o(obj, k, v) for k, v in attrs.iteritems()]
+    # [o(obj, k, v) for k, v in attrs.iteritems()]
+    if isinstance(obj, list):
+        [obj.append(v) for k, v in attrs.iteritems()]
+    else:
+        [o(obj, k, v) for k, v in attrs.iteritems()]
 
 
 def get_class_alias(klass):
